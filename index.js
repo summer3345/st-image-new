@@ -719,7 +719,14 @@ async function runExtract(text, supplement, targetIdx, retryAttempt, lockOverrid
         }
         currentDesc = desc;
         setPreview(desc);
-        setStatus("提取完成 — 可编辑后确认注入" + layerNote, "#6ec577"); setBtns(true, true);
+        /* 提取完成 → 自动注入到当前楼 */
+        var r = injectDescToMessage(desc, (typeof targetIdx === "number" ? targetIdx : currentIdx));
+        if (r.injected) {
+            setStatus("提取并注入第 " + (r.idx + 1) + " 楼成功 ✓" + layerNote, "#6ec577");
+            ipeNotice({ kind: "ok", title: "🎨 生图完成", body: "第 " + (r.idx + 1) + " 楼已注入生图标签" });
+        } else {
+            setStatus("提取完成，但跳过注入（可能已注入）" + layerNote, "#c9a227"); setBtns(true, true);
+        }
     } catch(e) {
         var userAbort = ipeUserAbortRequested;
         ipeUserAbortRequested = false;
