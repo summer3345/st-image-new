@@ -1,0 +1,140 @@
+/* ============================================================
+ *  🎨 Image Generator · IPE v2.1.0 — 样式
+ *  跟随酒馆自带主题，不自带主题切换。
+ * ============================================================ */
+
+/* ---------- 面板 ---------- */
+.ipe-panel {
+    border-radius: 12px;
+    padding: 16px;
+    margin: 8px 0;
+    font-size: 14px;
+}
+
+/* ---------- 面板头部 ---------- */
+.ipe-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+}
+.ipe-title {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* ---------- 折叠区块 ---------- */
+.ipe-section {
+    margin-bottom: 8px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.ipe-section-header {
+    padding: 8px 12px;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    font-size: 13px;
+}
+.ipe-section-body {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* ---------- 表单控件 ---------- */
+.ipe-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 12px;
+}
+.ipe-field input,
+.ipe-field textarea,
+.ipe-field select {
+    border-radius: 6px;
+    padding: 6px 8px;
+    font-size: 13px;
+    font-family: inherit;
+    width: 100%;
+    box-sizing: border-box;
+}
+.ipe-field input:focus,
+.ipe-field textarea:focus,
+.ipe-field select:focus {
+    outline: none;
+}
+.ipe-field textarea {
+    resize: vertical;
+    min-height: 36px;
+}
+
+/* ---------- 开关 ---------- */
+.ipe-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    cursor: pointer;
+}
+.ipe-toggle input {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* ---------- 按钮 ---------- */
+.ipe-btn {
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s, opacity 0.15s;
+}
+.ipe-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+.ipe-btn-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.ipe-btn-stop {
+    border-color: #d4726a;
+    color: #d4726a;
+}
+
+/* ---------- 状态文字 ---------- */
+.ipe-status {
+    font-size: 12px;
+    padding: 4px 0;
+    min-height: 18px;
+}
+
+/* ---------- 提示文字 ---------- */
+.ipe-hint {
+    font-size: 11px;
+    opacity: 0.7;
+}
+
+/* ---------- 预览框 ---------- */
+#ipe-preview-text {
+    font-family: monospace;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* ---------- 楼层 🎨 按钮 ---------- */
+.ipe-mes-gen,
+.ipe-mes-reinject {
+    opacity: 0.7;
+    transition: opacity 0.15s;
+}
+.ipe-mes-gen:hover,
+.ipe-mes-reinject:hover {
+    opacity: 1;
+}

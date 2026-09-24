@@ -1,0 +1,11 @@
+{
+  "display_name": "🎨 Image Generator · IPE",
+  "loading_order": 100,
+  "requires": [],
+  "optional": [],
+  "js": "index.js",
+  "css": "style.css",
+  "author": "ripple & GPT & Claude",
+  "version": "2.1.0",
+  "description": "🎨 Image Generator · IPE — 从 RP 正文提取场景描述，调用独立 API 生成英文生图提示词，可注入回正文。每条 AI 回复文末自动出现 🎨 生图按钮，手动点击才会触发提取+注入，不会自动打扰你的对话。支持分层提取、换画风重注入、多 API 预设、预设包导入导出、失败自动重试、请求打断。跟随酒馆自带主题。"
+}
