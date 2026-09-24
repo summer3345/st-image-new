@@ -11,31 +11,52 @@
     font-size: 14px;
 }
 
-/* ---------- 面板头部 ---------- */
+/* ---------- 面板头部（大抽屉标题） ---------- */
 .ipe-panel-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 12px;
     padding-bottom: 8px;
+    cursor: pointer;
+    user-select: none;
+}
+.ipe-panel-header:hover {
+    opacity: 0.85;
 }
 .ipe-title {
     font-size: 16px;
     font-weight: 700;
 }
+.ipe-drawer-arrow {
+    font-size: 14px;
+    opacity: 0.6;
+}
 
 /* ---------- 折叠区块 ---------- */
+.ipe-panel-body {
+}
 .ipe-section {
     margin-bottom: 8px;
     border-radius: 8px;
     overflow: hidden;
 }
 .ipe-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 8px 12px;
     font-weight: 600;
     cursor: pointer;
     user-select: none;
     font-size: 13px;
+}
+.ipe-section-header:hover {
+    opacity: 0.85;
+}
+.ipe-section-arrow {
+    font-size: 12px;
+    opacity: 0.6;
 }
 .ipe-section-body {
     padding: 12px;
