@@ -1,68 +1,11 @@
 /* ============================================================
  *  🎨 Image Generator · IPE v2.1.0 — 样式
- *  跟随酒馆自带主题，不自带主题切换。
+ *  使用酒馆原生 inline-drawer 折叠组件，跟随酒馆自带主题。
  * ============================================================ */
 
-/* ---------- 面板 ---------- */
-.ipe-panel {
-    border-radius: 12px;
-    padding: 16px;
+/* ---------- 面板容器间距 ---------- */
+#ipe-panel {
     margin: 8px 0;
-    font-size: 14px;
-}
-
-/* ---------- 面板头部（大抽屉标题） ---------- */
-.ipe-panel-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 12px;
-    padding-bottom: 8px;
-    cursor: pointer;
-    user-select: none;
-}
-.ipe-panel-header:hover {
-    opacity: 0.85;
-}
-.ipe-title {
-    font-size: 16px;
-    font-weight: 700;
-}
-.ipe-drawer-arrow {
-    font-size: 14px;
-    opacity: 0.6;
-}
-
-/* ---------- 折叠区块 ---------- */
-.ipe-panel-body {
-}
-.ipe-section {
-    margin-bottom: 8px;
-    border-radius: 8px;
-    overflow: hidden;
-}
-.ipe-section-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 12px;
-    font-weight: 600;
-    cursor: pointer;
-    user-select: none;
-    font-size: 13px;
-}
-.ipe-section-header:hover {
-    opacity: 0.85;
-}
-.ipe-section-arrow {
-    font-size: 12px;
-    opacity: 0.6;
-}
-.ipe-section-body {
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
 }
 
 /* ---------- 表单控件 ---------- */
@@ -71,6 +14,7 @@
     flex-direction: column;
     gap: 4px;
     font-size: 12px;
+    margin-bottom: 8px;
 }
 .ipe-field input,
 .ipe-field textarea,
@@ -99,6 +43,7 @@
     gap: 6px;
     font-size: 13px;
     cursor: pointer;
+    margin-bottom: 8px;
 }
 .ipe-toggle input {
     width: 16px;
@@ -106,27 +51,12 @@
     cursor: pointer;
 }
 
-/* ---------- 按钮 ---------- */
-.ipe-btn {
-    border-radius: 6px;
-    padding: 6px 12px;
-    font-size: 13px;
-    cursor: pointer;
-    font-family: inherit;
-    transition: background 0.15s, opacity 0.15s;
-}
-.ipe-btn:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-}
+/* ---------- 按钮行 ---------- */
 .ipe-btn-row {
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
-}
-.ipe-btn-stop {
-    border-color: #d4726a;
-    color: #d4726a;
+    margin-bottom: 8px;
 }
 
 /* ---------- 状态文字 ---------- */
@@ -158,4 +88,10 @@
 .ipe-mes-gen:hover,
 .ipe-mes-reinject:hover {
     opacity: 1;
+}
+
+/* ---------- 打断按钮特殊样式 ---------- */
+.ipe-btn-stop {
+    border-color: #d4726a;
+    color: #d4726a;
 }

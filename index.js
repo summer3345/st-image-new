@@ -1574,128 +1574,168 @@ function createUI() {
     if (d.getElementById("ipe-panel")) return;
 
     var html = ''
-        + '<div id="ipe-panel" class="ipe-panel">'
-        + '  <div class="ipe-panel-header" id="ipe-panel-toggle" title="点击展开/收起">'
-        + '    <span class="ipe-title">🎨 Image Generator · IPE</span>'
-        + '    <span class="ipe-drawer-arrow" id="ipe-drawer-arrow">▼</span>'
+        + '<div id="ipe-panel" class="inline-drawer">'
+        + '  <div class="inline-drawer-toggle inline-drawer-header">'
+        + '    <b>🎨 Image Generator · IPE</b>'
+        + '    <div class="inline-drawer-icon fa-solid fa-chevron-down down"></div>'
         + '  </div>'
-        + '  <div id="ipe-panel-body" class="ipe-panel-body" style="display:none">'
-        + '  <div class="ipe-section">'
-        + '    <div class="ipe-section-header" id="ipe-sh-toggle"><span>⚙️ 总开关</span><span class="ipe-section-arrow">▼</span></div>'
-        + '    <div class="ipe-section-body" id="ipe-sh-body" style="display:none">'
+        + '  <div class="inline-drawer-content">'
+        /* ── 总开关 ── */
+        + '  <div class="inline-drawer">'
+        + '    <div class="inline-drawer-toggle inline-drawer-header">'
+        + '      <b>⚙️ 总开关</b>'
+        + '      <div class="inline-drawer-icon fa-solid fa-chevron-down down"></div>'
+        + '    </div>'
+        + '    <div class="inline-drawer-content">'
         + '      <label class="ipe-toggle"><input type="checkbox" id="ipe-enabled"> 开启生图提取</label>'
         + '      <label class="ipe-field">请求超时(ms, 0=不限) <input type="number" id="ipe-timeout" class="text_pole" value="0" min="0" step="1000"></label>'
         + '    </div>'
         + '  </div>'
-        + '  <div class="ipe-section">'
-        + '    <div class="ipe-section-header" id="ipe-sh-api"><span>🔌 API 配置</span><span class="ipe-section-arrow">▼</span></div>'
-        + '    <div class="ipe-section-body" id="ipe-sh-api-body" style="display:none">'
+        /* ── API 配置 ── */
+        + '  <div class="inline-drawer">'
+        + '    <div class="inline-drawer-toggle inline-drawer-header">'
+        + '      <b>🔌 API 配置</b>'
+        + '      <div class="inline-drawer-icon fa-solid fa-chevron-down down"></div>'
+        + '    </div>'
+        + '    <div class="inline-drawer-content">'
         + '      <label class="ipe-field">API 预设 <select id="ipe-api-profile" class="text_pole"></select></label>'
         + '      <div class="ipe-btn-row">'
-        + '        <button type="button" id="ipe-api-add" class="ipe-btn">➕ 新增</button>'
-        + '        <button type="button" id="ipe-api-del" class="ipe-btn">🗑️ 删除</button>'
+        + '        <button type="button" id="ipe-api-add" class="menu_button">➕ 新增</button>'
+        + '        <button type="button" id="ipe-api-del" class="menu_button">🗑️ 删除</button>'
         + '      </div>'
         + '      <label class="ipe-field">Endpoint <input type="text" id="ipe-api-endpoint" class="text_pole" placeholder="https://api.example.com/v1"></label>'
         + '      <label class="ipe-field">API Key <input type="password" id="ipe-api-key" class="text_pole" placeholder="sk-..."></label>'
         + '      <div class="ipe-btn-row">'
-        + '        <button type="button" id="ipe-btn-fetch-models" class="ipe-btn">🔄 拉取模型</button>'
+        + '        <button type="button" id="ipe-btn-fetch-models" class="menu_button">🔄 拉取模型</button>'
         + '      </div>'
         + '      <label class="ipe-field">Model <select id="ipe-model-sel" class="text_pole"><option value="">— 选择模型 —</option></select></label>'
         + '      <label class="ipe-field">或手动输入 <input type="text" id="ipe-model" class="text_pole" placeholder="gpt-4o"></label>'
         + '    </div>'
         + '  </div>'
-        + '  <div class="ipe-section">'
-        + '    <div class="ipe-section-header" id="ipe-sh-tpl"><span>📝 基础模板</span><span class="ipe-section-arrow">▼</span></div>'
-        + '    <div class="ipe-section-body" id="ipe-sh-tpl-body" style="display:none">'
+        /* ── 基础模板 ── */
+        + '  <div class="inline-drawer">'
+        + '    <div class="inline-drawer-toggle inline-drawer-header">'
+        + '      <b>📝 基础模板</b>'
+        + '      <div class="inline-drawer-icon fa-solid fa-chevron-down down"></div>'
+        + '    </div>'
+        + '    <div class="inline-drawer-content">'
         + '      <label class="ipe-field">模板预设 <select id="ipe-tpl-sel" class="text_pole"></select></label>'
         + '      <div class="ipe-btn-row">'
-        + '        <button type="button" id="ipe-tpl-add" class="ipe-btn">➕ 新增</button>'
-        + '        <button type="button" id="ipe-tpl-del" class="ipe-btn">🗑️ 删除</button>'
+        + '        <button type="button" id="ipe-tpl-add" class="menu_button">➕ 新增</button>'
+        + '        <button type="button" id="ipe-tpl-del" class="menu_button">🗑️ 删除</button>'
         + '      </div>'
         + '      <label class="ipe-field">名称 <input type="text" id="ipe-tpl-name" class="text_pole"></label>'
         + '      <label class="ipe-field">模板 <textarea id="ipe-tpl-val" class="text_pole" rows="3" placeholder="<draw>{Description}</draw>"></textarea></label>'
         + '      <div class="ipe-hint">占位符: {Description} {Camera} {Env} {Mood} {Chars} {Pose}</div>'
         + '    </div>'
         + '  </div>'
-        + '  <div class="ipe-section">'
-        + '    <div class="ipe-section-header" id="ipe-sh-anchor"><span>🧍 角色锚点</span><span class="ipe-section-arrow">▼</span></div>'
-        + '    <div class="ipe-section-body" id="ipe-sh-anchor-body" style="display:none">'
+        /* ── 角色锚点 ── */
+        + '  <div class="inline-drawer">'
+        + '    <div class="inline-drawer-toggle inline-drawer-header">'
+        + '      <b>🧍 角色锚点</b>'
+        + '      <div class="inline-drawer-icon fa-solid fa-chevron-down down"></div>'
+        + '    </div>'
+        + '    <div class="inline-drawer-content">'
         + '      <label class="ipe-field">锚点预设 <select id="ipe-anchor-sel" class="text_pole"></select></label>'
         + '      <div class="ipe-btn-row">'
-        + '        <button type="button" id="ipe-anchor-add" class="ipe-btn">➕ 新增</button>'
-        + '        <button type="button" id="ipe-anchor-del" class="ipe-btn">🗑️ 删除</button>'
+        + '        <button type="button" id="ipe-anchor-add" class="menu_button">➕ 新增</button>'
+        + '        <button type="button" id="ipe-anchor-del" class="menu_button">🗑️ 删除</button>'
         + '      </div>'
         + '      <label class="ipe-field">名称 <input type="text" id="ipe-anchor-name" class="text_pole"></label>'
         + '      <label class="ipe-field">锚点内容 <textarea id="ipe-anchor-val" class="text_pole" rows="4" placeholder="角色外貌资料..."></textarea></label>'
         + '      <label class="ipe-field">使用规则 <textarea id="ipe-anchor-guide" class="text_pole" rows="4"></textarea></label>'
         + '    </div>'
         + '  </div>'
-        + '  <div class="ipe-section">'
-        + '    <div class="ipe-section-header" id="ipe-sh-rule"><span>📋 提取规则</span><span class="ipe-section-arrow">▼</span></div>'
-        + '    <div class="ipe-section-body" id="ipe-sh-rule-body" style="display:none">'
+        /* ── 提取规则 ── */
+        + '  <div class="inline-drawer">'
+        + '    <div class="inline-drawer-toggle inline-drawer-header">'
+        + '      <b>📋 提取规则</b>'
+        + '      <div class="inline-drawer-icon fa-solid fa-chevron-down down"></div>'
+        + '    </div>'
+        + '    <div class="inline-drawer-content">'
         + '      <label class="ipe-field">规则预设 <select id="ipe-rule-sel" class="text_pole"></select></label>'
         + '      <div class="ipe-btn-row">'
-        + '        <button type="button" id="ipe-rule-add" class="ipe-btn">➕ 新增</button>'
-        + '        <button type="button" id="ipe-rule-del" class="ipe-btn">🗑️ 删除</button>'
+        + '        <button type="button" id="ipe-rule-add" class="menu_button">➕ 新增</button>'
+        + '        <button type="button" id="ipe-rule-del" class="menu_button">🗑️ 删除</button>'
         + '      </div>'
         + '      <label class="ipe-field">名称 <input type="text" id="ipe-rule-name" class="text_pole"></label>'
         + '      <label class="ipe-field">规则 <textarea id="ipe-rule-val" class="text_pole" rows="3"></textarea></label>'
         + '    </div>'
         + '  </div>'
-        + '  <div class="ipe-section">'
-        + '    <div class="ipe-section-header" id="ipe-sh-sys"><span>💬 System Prompt</span><span class="ipe-section-arrow">▼</span></div>'
-        + '    <div class="ipe-section-body" id="ipe-sh-sys-body" style="display:none">'
+        /* ── System Prompt ── */
+        + '  <div class="inline-drawer">'
+        + '    <div class="inline-drawer-toggle inline-drawer-header">'
+        + '      <b>💬 System Prompt</b>'
+        + '      <div class="inline-drawer-icon fa-solid fa-chevron-down down"></div>'
+        + '    </div>'
+        + '    <div class="inline-drawer-content">'
         + '      <label class="ipe-field">SP 预设 <select id="ipe-sys-sel" class="text_pole"></select></label>'
         + '      <div class="ipe-btn-row">'
-        + '        <button type="button" id="ipe-sys-add" class="ipe-btn">➕ 新增</button>'
-        + '        <button type="button" id="ipe-sys-del" class="ipe-btn">🗑️ 删除</button>'
+        + '        <button type="button" id="ipe-sys-add" class="menu_button">➕ 新增</button>'
+        + '        <button type="button" id="ipe-sys-del" class="menu_button">🗑️ 删除</button>'
         + '      </div>'
         + '      <label class="ipe-field">名称 <input type="text" id="ipe-sys-name" class="text_pole"></label>'
         + '      <label class="ipe-field">System Prompt <textarea id="ipe-sys-val" class="text_pole" rows="3"></textarea></label>'
         + '    </div>'
         + '  </div>'
-        + '  <div class="ipe-section">'
-        + '    <div class="ipe-section-header" id="ipe-sh-layer"><span>🎨 分层提取</span><span class="ipe-section-arrow">▼</span></div>'
-        + '    <div class="ipe-section-body" id="ipe-sh-layer-body" style="display:none">'
+        /* ── 分层提取 ── */
+        + '  <div class="inline-drawer">'
+        + '    <div class="inline-drawer-toggle inline-drawer-header">'
+        + '      <b>🎨 分层提取</b>'
+        + '      <div class="inline-drawer-icon fa-solid fa-chevron-down down"></div>'
+        + '    </div>'
+        + '    <div class="inline-drawer-content">'
         + '      <label class="ipe-toggle"><input type="checkbox" id="ipe-layered"> 开启分层</label>'
         + '      <div id="ipe-layers-box" style="display:none">'
         + ipeImgLayerRowsHTML("ipe", false)
         + '      </div>'
         + '    </div>'
         + '  </div>'
-        + '  <div class="ipe-section">'
-        + '    <div class="ipe-section-header" id="ipe-sh-pack"><span>📦 预设包</span><span class="ipe-section-arrow">▼</span></div>'
-        + '    <div class="ipe-section-body" id="ipe-sh-pack-body" style="display:none">'
+        /* ── 预设包 ── */
+        + '  <div class="inline-drawer">'
+        + '    <div class="inline-drawer-toggle inline-drawer-header">'
+        + '      <b>📦 预设包</b>'
+        + '      <div class="inline-drawer-icon fa-solid fa-chevron-down down"></div>'
+        + '    </div>'
+        + '    <div class="inline-drawer-content">'
         + '      <div class="ipe-btn-row">'
-        + '        <button type="button" id="ipe-pack-export" class="ipe-btn">📤 导出全部</button>'
-        + '        <button type="button" id="ipe-pack-export-anchors" class="ipe-btn">📤 导出锚点</button>'
-        + '        <button type="button" id="ipe-pack-import" class="ipe-btn">📥 导入</button>'
+        + '        <button type="button" id="ipe-pack-export" class="menu_button">📤 导出全部</button>'
+        + '        <button type="button" id="ipe-pack-export-anchors" class="menu_button">📤 导出锚点</button>'
+        + '        <button type="button" id="ipe-pack-import" class="menu_button">📥 导入</button>'
         + '        <input type="file" id="ipe-pack-file" accept=".json" style="display:none">'
         + '      </div>'
         + '    </div>'
         + '  </div>'
-        + '  <div class="ipe-section">'
-        + '    <div class="ipe-section-header" id="ipe-sh-supp"><span>🔍 补充指令</span><span class="ipe-section-arrow">▼</span></div>'
-        + '    <div class="ipe-section-body" id="ipe-sh-supp-body" style="display:none">'
+        /* ── 补充指令 ── */
+        + '  <div class="inline-drawer">'
+        + '    <div class="inline-drawer-toggle inline-drawer-header">'
+        + '      <b>🔍 补充指令</b>'
+        + '      <div class="inline-drawer-icon fa-solid fa-chevron-down down"></div>'
+        + '    </div>'
+        + '    <div class="inline-drawer-content">'
         + '      <label class="ipe-field">常用短语 <select id="ipe-supp-presets" class="text_pole"><option value="">常用短语…</option></select></label>'
         + '      <div class="ipe-btn-row">'
-        + '        <button type="button" id="ipe-supp-save" class="ipe-btn">💾 存当前</button>'
-        + '        <button type="button" id="ipe-supp-del" class="ipe-btn">🗑️ 删选中</button>'
+        + '        <button type="button" id="ipe-supp-save" class="menu_button">💾 存当前</button>'
+        + '        <button type="button" id="ipe-supp-del" class="menu_button">🗑️ 删选中</button>'
         + '      </div>'
         + '      <label class="ipe-field">补充指令 <textarea id="ipe-supplement" class="text_pole" rows="2" placeholder="这次提取额外要交代的话..."></textarea></label>'
         + '    </div>'
         + '  </div>'
-        + '  <div class="ipe-section" id="ipe-section-preview">'
-        + '    <div class="ipe-section-header" id="ipe-sh-preview"><span>📝 预览</span><span class="ipe-section-arrow">▼</span></div>'
-        + '    <div class="ipe-section-body" id="ipe-sh-preview-body" style="display:none">'
+        /* ── 预览 ── */
+        + '  <div class="inline-drawer" id="ipe-section-preview">'
+        + '    <div class="inline-drawer-toggle inline-drawer-header">'
+        + '      <b>📝 预览</b>'
+        + '      <div class="inline-drawer-icon fa-solid fa-chevron-down down"></div>'
+        + '    </div>'
+        + '    <div class="inline-drawer-content">'
         + '      <textarea id="ipe-preview-text" class="text_pole" rows="6" placeholder="提取结果预览..."></textarea>'
         + '      <div id="ipe-status" class="ipe-status">就绪</div>'
         + '      <div class="ipe-btn-row">'
-        + '        <button type="button" id="ipe-btn-extract" class="ipe-btn">🔍 提取</button>'
-        + '        <button type="button" id="ipe-btn-reroll" class="ipe-btn" disabled>🎲 重摇</button>'
-        + '        <button type="button" id="ipe-btn-inject" class="ipe-btn" disabled>📥 注入</button>'
-        + '        <button type="button" id="ipe-btn-reinject" class="ipe-btn">🎨 换画风</button>'
-        + '        <button type="button" id="ipe-btn-stop" class="ipe-btn ipe-btn-stop" style="display:none">⏹️ 打断</button>'
+        + '        <button type="button" id="ipe-btn-extract" class="menu_button">🔍 提取</button>'
+        + '        <button type="button" id="ipe-btn-reroll" class="menu_button" disabled>🎲 重摇</button>'
+        + '        <button type="button" id="ipe-btn-inject" class="menu_button" disabled>📥 注入</button>'
+        + '        <button type="button" id="ipe-btn-reinject" class="menu_button">🎨 换画风</button>'
+        + '        <button type="button" id="ipe-btn-stop" class="menu_button ipe-btn-stop" style="display:none">⏹️ 打断</button>'
         + '      </div>'
         + '    </div>'
         + '  </div>'
@@ -1729,45 +1769,7 @@ function createUI() {
         var el = q("#" + id); if (el) el.addEventListener("click", function(){ ipeDeleteApiProfile(); fillApiSelect(); });
     });
 
-    /* 大抽屉折叠：点击面板标题展开/收起全部 */
-    (function(){
-        var toggle = q("#ipe-panel-toggle");
-        var body = q("#ipe-panel-body");
-        var arrow = q("#ipe-drawer-arrow");
-        if (toggle && body) {
-            toggle.addEventListener("click", function(){
-                var open = body.style.display !== "none";
-                body.style.display = open ? "none" : "";
-                if (arrow) arrow.textContent = open ? "▼" : "▲";
-            });
-        }
-    })();
-
-    /* 各 section 折叠：点击 section-header 展开/收起对应 body */
-    var shPairs = [
-        ["ipe-sh-toggle", "ipe-sh-body"],
-        ["ipe-sh-api", "ipe-sh-api-body"],
-        ["ipe-sh-tpl", "ipe-sh-tpl-body"],
-        ["ipe-sh-anchor", "ipe-sh-anchor-body"],
-        ["ipe-sh-rule", "ipe-sh-rule-body"],
-        ["ipe-sh-sys", "ipe-sh-sys-body"],
-        ["ipe-sh-layer", "ipe-sh-layer-body"],
-        ["ipe-sh-pack", "ipe-sh-pack-body"],
-        ["ipe-sh-supp", "ipe-sh-supp-body"],
-        ["ipe-sh-preview", "ipe-sh-preview-body"]
-    ];
-    shPairs.forEach(function(pair){
-        var hdr = q("#" + pair[0]);
-        var bdy = q("#" + pair[1]);
-        if (hdr && bdy) {
-            hdr.addEventListener("click", function(){
-                var open = bdy.style.display !== "none";
-                bdy.style.display = open ? "none" : "";
-                var ar = hdr.querySelector(".ipe-section-arrow");
-                if (ar) ar.textContent = open ? "▼" : "▲";
-            });
-        }
-    });
+    /* 抽屉折叠由酒馆原生 inline-drawer 处理，无需手写 */
 
     /* 拉取模型按钮 */
     var fetchBtn = q("#ipe-btn-fetch-models");
